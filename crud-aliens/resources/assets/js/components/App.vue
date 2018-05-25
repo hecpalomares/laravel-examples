@@ -28,22 +28,54 @@
     export default {
         data() {
             return {
-                cruds: []
+                cruds: [],
+                mute: false
             }
         },
         methods: {
             read() {
-            //TODO
+                this.mute = true;
+                window.axios.get('/api/cruds').then(({data}) => {
+                    data.forEach(crud => {
+                        this.cruds.push(new Crud(crud));
+                    });
+                    this.mute = false;
+                }); 
+            },
+            update(id, color) {
+                this.mute = true;
+                window.axios.put(`/api/cruds/${id}`, { color }).then(() => {
+                // Once AJAX resolves we can update the Crud with the new color
+                    this.cruds.find(crud => crud.id === id).color = color;
+                    this.mute = false;
+                });
+            },
+            del(id) {
+                this.mute = true;
+                window.axios.get('/api/cruds/create').then(({ data }) => {
+                    let index = this.cruds.findIndex(crud => crud.id === id);
+                    this.cruds.splice(index, 1);
+                    this.mute = false;
+                });
+            },
+            create() {
+                this.mute = true;
+                window.axios.get('/api/cruds/create').then(({ data }) => {
+                    this.cruds.push(new Crud(data));
+                    this.mute = false;
+                });
+            }
         },
-        update(id, color) {
-            //TODO
-        },
-        del(id) {
-            //TODO
-        }
-    },
+    created() {
+        this.read()
+    }, 
     components: {
-        CrudComponents
+        CrudComponent
+    },
+    watch: {
+        mute(val) {
+            document.getElementById('mute').className = val ? "on" : "";
+        }
     }
 }
 </script>

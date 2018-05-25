@@ -13872,9 +13872,12 @@ module.exports = __webpack_require__(43);
 
 /***/ }),
 /* 12 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_App_vue__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -13885,16 +13888,25 @@ __webpack_require__(13);
 
 window.Vue = __webpack_require__(36);
 
+Vue.config.devtools = true;
+Vue.config.performance = true;
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', __webpack_require__(39));
+
 
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    App: __WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a
+  },
+  render: function render(h) {
+    return h(__WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a);
+  }
 });
 
 /***/ }),
@@ -47175,7 +47187,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/ExampleComponent.vue"
+Component.options.__file = "resources/assets/js/components/CrudComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47184,9 +47196,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7168fb6a", Component.options)
+    hotAPI.createRecord("data-v-403cb738", Component.options)
   } else {
-    hotAPI.reload("data-v-7168fb6a", Component.options)
+    hotAPI.reload("data-v-403cb738", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47327,10 +47339,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    mounted: function mounted() {
-        console.log('Component mounted.');
+    computed: {
+        image: function image() {
+            return '/images/' + this.color + '.png';
+        }
+    },
+    methods: {
+        update: function update(val) {
+            this.$emit('update', this.id, val.target.selectedOptions[0].value);
+        },
+        del: function del() {
+            this.$emit('delete', this.id);
+        }
+    },
+    props: ['id', 'color', 'name'],
+    filters: {
+        properCase: function properCase(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
     }
 });
 
@@ -47342,29 +47374,41 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "crud" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-2" }, [
+      _c("h3", [_vm._v("Name: " + _vm._s(_vm._f("properCase")(_vm.name)))]),
+      _vm._v(" "),
+      _c(
+        "select",
+        { on: { change: _vm.update } },
+        _vm._l(["red", "green"], function(col) {
+          return _c(
+            "option",
+            {
+              key: col,
+              domProps: {
+                value: col,
+                selected: col === _vm.color ? "selected" : ""
+              }
+            },
+            [_vm._v(_vm._s(_vm._f("properCase")(col)))]
+          )
+        })
+      ),
+      _vm._v(" "),
+      _c("button", { on: { click: _vm.del } }, [_vm._v("Delete")])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card card-default" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "col-1" }, [
+      _c("img", { attrs: { src: "image", alt: "" } })
     ])
   }
 ]
@@ -47373,7 +47417,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7168fb6a", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-403cb738", module.exports)
   }
 }
 
@@ -47382,6 +47426,230 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(40)
+/* script */
+var __vue_script__ = __webpack_require__(49)
+/* template */
+var __vue_template__ = __webpack_require__(50)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/App.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-8142f38c", Component.options)
+  } else {
+    hotAPI.reload("data-v-8142f38c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CrudComponent_vue__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__CrudComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__CrudComponent_vue__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+function Crud(_ref) {
+    var id = _ref.id,
+        color = _ref.color,
+        name = _ref.name;
+
+    this.id = id;
+    this.color = color;
+    this.name = name;
+}
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            cruds: [],
+            mute: false
+        };
+    },
+
+    methods: {
+        read: function read() {
+            var _this = this;
+
+            this.mute = true;
+            window.axios.get('/api/cruds').then(function (_ref2) {
+                var data = _ref2.data;
+
+                data.forEach(function (crud) {
+                    _this.cruds.push(new Crud(crud));
+                });
+                _this.mute = false;
+            });
+        },
+        update: function update(id, color) {
+            var _this2 = this;
+
+            this.mute = true;
+            window.axios.put('/api/cruds/' + id, { color: color }).then(function () {
+                // Once AJAX resolves we can update the Crud with the new color
+                _this2.cruds.find(function (crud) {
+                    return crud.id === id;
+                }).color = color;
+                _this2.mute = false;
+            });
+        },
+        del: function del(id) {
+            var _this3 = this;
+
+            this.mute = true;
+            window.axios.get('/api/cruds/create').then(function (_ref3) {
+                var data = _ref3.data;
+
+                var index = _this3.cruds.findIndex(function (crud) {
+                    return crud.id === id;
+                });
+                _this3.cruds.splice(index, 1);
+                _this3.mute = false;
+            });
+        },
+        create: function create() {
+            var _this4 = this;
+
+            this.mute = true;
+            window.axios.get('/api/cruds/create').then(function (_ref4) {
+                var data = _ref4.data;
+
+                _this4.cruds.push(new Crud(data));
+                _this4.mute = false;
+            });
+        }
+    },
+    created: function created() {
+        this.read();
+    },
+
+    components: {
+        CrudComponent: __WEBPACK_IMPORTED_MODULE_0__CrudComponent_vue___default.a
+    },
+    watch: {
+        mute: function mute(val) {
+            document.getElementById('mute').className = val ? "on" : "";
+        }
+    }
+});
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { attrs: { id: "app" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _vm._l(_vm.cruds, function(crud) {
+        return _c(
+          "crud-component",
+          _vm._b(
+            { key: crud.id, on: { update: _vm.update, delete: _vm.del } },
+            "crud-component",
+            crud,
+            false
+          )
+        )
+      }),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                _vm.create()
+              }
+            }
+          },
+          [_vm._v("Add")]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "heading" }, [_c("h1", [_vm._v("Cruds")])])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-8142f38c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
